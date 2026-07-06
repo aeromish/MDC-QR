@@ -10,7 +10,7 @@ export class UploadsController {
   @RequirePermissions('product.manage')
   @Post('image')
   @UseInterceptors(FileInterceptor('file'))
-  upload(@UploadedFile() file: Express.Multer.File) {
+  upload(@UploadedFile() file: any) {
     if (!file) throw new BadRequestException('Chua co file anh (field "file")');
     const base = this.config.get('PUBLIC_BASE_URL') || '';
     return { url: `${base}/uploads/${file.filename}`, filename: file.filename };
